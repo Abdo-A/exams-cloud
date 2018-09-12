@@ -12,7 +12,7 @@ import Computer from "../pages/Subjects/Computer/Computer";
 export const pages = [
   {
     name: "home",
-    path: "/home",
+    path: "/",
     component: Home
   },
   {
@@ -27,7 +27,7 @@ export const pages = [
   },
   {
     name: "history",
-    path: "/History",
+    path: "/history",
     component: History
   },
   {
