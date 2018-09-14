@@ -1,73 +1,19 @@
+import { connect } from "react-redux";
 import { Spin } from "antd";
 import axios from "axios";
 import React, { Component } from "react";
 
+import * as actions from "../../../store/actions";
+
 import "./Math.css";
 
 class math extends Component {
-  state = {
-    question: null,
-    correct_answer: null,
-    incorrect_answers_array: null,
-    answers: null
-  };
-
   componentDidMount() {
-    this.generateNewQuestion();
+    this.props.getQuestions(10, "math", "boolean");
   }
 
-  generateNewQuestion = () => {
-    this.setState(() => ({
-      question: null,
-      correct_answer: null,
-      answers: null
-    }));
-
-    axios
-      .get(
-        "https://opentdb.com/api.php?amount=1&category=19&difficulty=easy&type=multiple"
-      )
-      .then(res => {
-        //Getting answers_array
-        const answers_array = res.data.results[0].incorrect_answers.map(
-          answer => {
-            const parsedAnswer = new DOMParser().parseFromString(
-              answer,
-              "text/html"
-            ).body.innerHTML;
-            return parsedAnswer;
-          }
-        );
-
-        //Getting correct_answer
-        const correct_answer = new DOMParser().parseFromString(
-          res.data.results[0].correct_answer,
-          "text/html"
-        ).body.innerHTML;
-
-        //Inserting correct asnwers randomly into answers array
-        const random_number = Math.floor(Math.random() * 4);
-        answers_array.splice(random_number, 0, correct_answer);
-
-        //Getting question
-        const question = new DOMParser().parseFromString(
-          res.data.results[0].question,
-          "text/html"
-        ).body.innerHTML;
-
-        this.setState(() => ({
-          question: question,
-          correct_answer: correct_answer,
-          answers: answers_array
-        }));
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  answerItemClicked = clickedItem => {
-    if (clickedItem === this.state.correct_answer) {
+  answerItemClicked = (clickedItem, correctAnswer) => {
+    if (clickedItem === correctAnswer) {
       console.log("Yabn el la3eeba");
     } else {
       console.log("Ya homar");
@@ -79,16 +25,26 @@ class math extends Component {
       <div className="Math">
         <div>Math Page</div>
         <div>
-          Question: {this.state.question ? this.state.question : <Spin />}
+          Question:{" "}
+          {this.props.mathQuestions ? (
+            this.props.mathQuestions[0].question
+          ) : (
+            <Spin />
+          )}
         </div>
         <br />
         <a>
-          {this.state.answers &&
-            this.state.answers.map(answer => (
+          {this.props.mathQuestions &&
+            this.props.mathQuestions[0].answers.map(answer => (
               <li
                 key={answer}
                 className="Answer"
-                onClick={() => this.answerItemClicked(answer)}
+                onClick={() =>
+                  this.answerItemClicked(
+                    answer,
+                    this.props.mathQuestions[0].correctAnswer
+                  )
+                }
               >
                 {answer}
               </li>
@@ -100,4 +56,19 @@ class math extends Component {
   }
 }
 
-export default math;
+const mapStateToProps = state => {
+  return {
+    mathQuestions: state.internet.mathQuestions
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getQuestions: (a, b, c, d) => dispatch(actions.getQuestions(a, b, c, d))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(math);

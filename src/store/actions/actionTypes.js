@@ -1,1 +1,1 @@
-export const GET_QUESTIONS = "GET_QUESTIONS";
+export const SET_QUESTIONS = "SET_QUESTIONS";

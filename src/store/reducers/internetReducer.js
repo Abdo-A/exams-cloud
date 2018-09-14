@@ -4,16 +4,25 @@ const INITIAL_STATE = {
   mathQuestions: null,
   historyQuestions: null,
   scienceQuestions: null,
-  computerQuestions: null
+  computerQuestions: null,
+  errorFetchingQuestions: null
 };
 
 const internetReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case actionTypes.GET_QUESTIONS:
+    case actionTypes.SET_QUESTIONS:
+      if (action.error) {
+        return {
+          ...state,
+          errorFetchingQuestions: action.error
+        };
+      }
       return {
         ...state,
-        ...action.payload
+        // Filling this specific type of questions:
+        [action.questionsCategory + "Questions"]: action.questions //ex:mathQuestions
       };
+
     default:
       return state;
   }
