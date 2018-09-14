@@ -3,6 +3,7 @@ import { Spin } from "antd";
 import React, { Component } from "react";
 
 import * as actions from "../../../store/actions";
+import QuestionsList from "../../../components/Question/QuestionsList/QuestionsList";
 
 class Science extends Component {
   componentDidMount() {
@@ -26,25 +27,10 @@ class Science extends Component {
       <div className="Science">
         <div>Science Page</div>
         {this.props.scienceQuestions ? (
-          <div>
-            Question: {this.props.scienceQuestions[0].question}
-            <br />
-            <a>
-              {this.props.scienceQuestions[0].answers.map(answer => (
-                <li
-                  key={answer}
-                  onClick={() =>
-                    this.answerItemClicked(
-                      answer,
-                      this.props.scienceQuestions[0].correctAnswer
-                    )
-                  }
-                >
-                  {answer}
-                </li>
-              ))}
-            </a>
-          </div>
+          <QuestionsList
+            questions={this.props.scienceQuestions}
+            onAnswer={this.answerItemClicked}
+          />
         ) : (
           <Spin />
         )}
