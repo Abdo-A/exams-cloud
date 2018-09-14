@@ -1,2 +1,2 @@
-export * from "./basicActions";
+export * from "./mainActions";
 export * from "./internetActions";

@@ -6,12 +6,15 @@ const questionsList = props => {
     <div className="QuestionsList">
       {props.questions.map(question => {
         return (
-          <Question
-            question={question.question}
-            correctAnswer={question.correctAnswer}
-            answers={question.answers}
-            onAnswer={props.onAnswer}
-          />
+          <div key={question.question}>
+            <Question
+              question={question.question}
+              correctAnswer={question.correctAnswer}
+              answers={question.answers}
+              onAnswer={props.onAnswer}
+            />
+            <br />
+          </div>
         );
       })}
     </div>
