@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
 import { Spin } from "antd";
-import axios from "axios";
 import React, { Component } from "react";
 
 import * as actions from "../../../store/actions";
@@ -11,6 +10,10 @@ class math extends Component {
   componentDidMount() {
     this.props.getQuestions(10, "math", "boolean");
   }
+
+  generateNewQuestion = () => {
+    this.props.getQuestions(10, "math", "boolean");
+  };
 
   answerItemClicked = (clickedItem, correctAnswer) => {
     if (clickedItem === correctAnswer) {
@@ -24,32 +27,29 @@ class math extends Component {
     return (
       <div className="Math">
         <div>Math Page</div>
-        <div>
-          Question:{" "}
-          {this.props.mathQuestions ? (
-            this.props.mathQuestions[0].question
-          ) : (
-            <Spin />
-          )}
-        </div>
-        <br />
-        <a>
-          {this.props.mathQuestions &&
-            this.props.mathQuestions[0].answers.map(answer => (
-              <li
-                key={answer}
-                className="Answer"
-                onClick={() =>
-                  this.answerItemClicked(
-                    answer,
-                    this.props.mathQuestions[0].correctAnswer
-                  )
-                }
-              >
-                {answer}
-              </li>
-            ))}
-        </a>
+        {this.props.mathQuestions ? (
+          <div>
+            Question: {this.props.mathQuestions[0].question}
+            <br />
+            <a>
+              {this.props.mathQuestions[0].answers.map(answer => (
+                <li
+                  key={answer}
+                  onClick={() =>
+                    this.answerItemClicked(
+                      answer,
+                      this.props.mathQuestions[0].correctAnswer
+                    )
+                  }
+                >
+                  {answer}
+                </li>
+              ))}
+            </a>
+          </div>
+        ) : (
+          <Spin />
+        )}
         <button onClick={this.generateNewQuestion}>New Question</button>
       </div>
     );
