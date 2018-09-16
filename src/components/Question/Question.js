@@ -2,7 +2,7 @@ import React from "react";
 
 const question = props => {
   return (
-    <div className="Question">
+    <div className="Question" style={{ backgroundColor: "#f3f3f3" }}>
       <div>
         Question: {props.question}
         <br />
