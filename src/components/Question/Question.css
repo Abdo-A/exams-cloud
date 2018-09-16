@@ -1,0 +1,30 @@
+.Question {
+  background-color: #f3f3f3;
+  margin: 10px;
+}
+
+.Question__Head {
+  font-weight: 700;
+}
+
+.Question__Answers {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.Question__Answer {
+  background-color: rgb(48, 45, 45);
+  color: rgb(160, 146, 146);
+  padding: 5px 10px;
+  border-radius: 10px;
+  transition: all 0.3s;
+  box-shadow: -2px 2px 34px 0px rgba(207, 172, 207, 1);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.Question__Answer:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 4px 17px 0px rgba(0, 0, 0, 1);
+}

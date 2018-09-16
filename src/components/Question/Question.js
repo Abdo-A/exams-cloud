@@ -1,21 +1,28 @@
+import { Icon } from "semantic-ui-react";
 import React from "react";
+
+import "./Question.css";
 
 const question = props => {
   return (
-    <div className="Question" style={{ backgroundColor: "#f3f3f3" }}>
+    <div className="Question">
       <div>
-        Question: {props.question}
-        <br />
-        <a>
+        <div className="Question__Head">
+          <Icon name="question" />
+          {props.question}
+        </div>
+
+        <div className="Question__Answers">
           {props.answers.map(answer => (
-            <li
+            <span
               key={answer}
+              className="Question__Answer"
               onClick={() => props.onAnswer(answer, props.correctAnswer)}
             >
               {answer}
-            </li>
+            </span>
           ))}
-        </a>
+        </div>
       </div>
     </div>
   );

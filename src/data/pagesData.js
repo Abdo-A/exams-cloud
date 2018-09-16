@@ -1,10 +1,10 @@
 // Pages imports:
 
+import ComputerPage from "../pages/Subjects/Computer/ComputerPage";
+import HistoryPage from "../pages/Subjects/History/HistoryPage";
 import Home from "../pages/Home/Home";
-import Math from "../pages/Subjects/Math/Math";
-import History from "../pages/Subjects/History/History";
-import Science from "../pages/Subjects/Science/Science";
-import Computer from "../pages/Subjects/Computer/Computer";
+import MathPage from "../pages/Subjects/Math/MathPage";
+import SciencePage from "../pages/Subjects/Science/SciencePage";
 
 //Pages
 //Note: the Icon property is the name of the SEMANTIC UI alternative icon
@@ -18,21 +18,21 @@ export const pages = [
   {
     name: "math",
     path: "/math",
-    component: Math
+    component: MathPage
   },
   {
     name: "science",
     path: "/science",
-    component: Science
+    component: SciencePage
   },
   {
     name: "history",
     path: "/history",
-    component: History
+    component: HistoryPage
   },
   {
     name: "computer",
     path: "/computer",
-    component: Computer
+    component: ComputerPage
   }
 ];
